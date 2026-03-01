@@ -1,9 +1,7 @@
 import Router from "express";
 const authrouter = Router();
 
-authrouter.get("/", (req, res) => {
-    res.send("Hello World");
-});
+authrouter.post("/register")
 
 
 export default authrouter;
