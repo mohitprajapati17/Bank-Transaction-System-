@@ -15,7 +15,7 @@ export async function userRegisterController(req:Request, res:Response
 ){
     const {email,password,name} = req.body;
 
-    const isexist : null | any = await userModel.findOne({email});
+    const isexist : null | any = await userModel.findOne({email}).select("+password");
     if(isexist){
         return res.status(402).json({message:"User already exists",status:"failed"});
     }
