@@ -1,5 +1,5 @@
 import { userModel} from "../model/user.model.ts";
-// import { Request, Response } from "express";
+import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 
@@ -9,10 +9,13 @@ import jwt from "jsonwebtoken";
  * -POST /api/auth/register
  */
 
-export async function userRegisterController(req:any, res:any){
+
+export async function userRegisterController(req:Request, res:Response
+
+){
     const {email,password,name} = req.body;
 
-    const isexist = await userModel.findOne({email});
+    const isexist : null | any = await userModel.findOne({email});
     if(isexist){
         return res.status(402).json({message:"User already exists",status:"failed"});
     }
@@ -26,7 +29,8 @@ export async function userRegisterController(req:any, res:any){
             id:user._id,
             email:user.email,
             name:user.name
-        }
+        },
+        token
     })
 
     return res.status(200).json({message:"User registered successfully",status:"success",user,token});
